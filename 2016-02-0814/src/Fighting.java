@@ -2,7 +2,7 @@
  * Created by lzakharov on 12.02.16.
  */
 public interface Fighting {
-    void punch();
-    void kick();
-    void dodge();
+    int punch(Soldier soldier);
+    int kick(Soldier soldier);
+    boolean dodge();
 }

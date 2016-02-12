@@ -4,4 +4,6 @@
 public interface Healing {
     void heal();
     void tie();
+    void heal(Soldier soldier);
+    void tie(Soldier soldier);
 }
