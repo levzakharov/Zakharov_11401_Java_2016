@@ -1,3 +1,5 @@
+package ru.kpfu.itis.lzakharov.army;
+
 import java.util.Random;
 
 /**

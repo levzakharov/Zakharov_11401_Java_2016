@@ -1,28 +1,25 @@
+package ru.kpfu.itis.lzakharov.army;
+
 import java.util.Random;
 
 /**
  * Created by lzakharov on 12.02.16.
  */
-public class Tank extends Machine implements Shooting{
+public class Infantryman extends Soldier implements Shooting{
+    Shootable rifle;
     boolean isAim = false;
-    boolean isReadyToShoot = true;
 
-    public Tank(int speed, int fuel) {
-        super(speed, fuel);
-    }
-
-    @Override
-    public int accelerate() {
-        speed = Math.max(60, speed + 10);
-        return speed;
+    public Infantryman(String name, int x, int y, int health, String direction, int punchDamage, int kickDamage) {
+        super(name, x, y, health, direction, punchDamage, kickDamage);
+        rifle = new Rifle(this);
     }
 
     @Override
     public boolean shoot() {
         Random random = new Random();
-        isReadyToShoot = false;
 
-        if (random.nextFloat() > (isAim ? 0.8 : 0.1)) {
+        if (random.nextFloat() > (isAim ? 0.7 : 0.5)) {
+            rifle.shoot();
             System.out.println("Caused damage!");
             return true;
         } else {
@@ -38,6 +35,6 @@ public class Tank extends Machine implements Shooting{
 
     @Override
     public void reload() {
-        isReadyToShoot = true;
+        rifle.reload();
     }
 }
