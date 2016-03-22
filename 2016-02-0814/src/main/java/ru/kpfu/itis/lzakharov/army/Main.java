@@ -1,5 +1,8 @@
 package ru.kpfu.itis.lzakharov.army;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,13 +11,15 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        Infantryman infantryman = new Infantryman("A", 0, 0, 100, "NORTH", 2, 3);
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+
+        Infantryman infantryman = (Infantryman) context.getBean("infantryman");
 
         infantryman.shoot();
         infantryman.aim();
         infantryman.reload();
 
-        Medic medic = new Medic("B", 1, 1, 100, "NORTH", 2, 2);
+        Medic medic = (Medic) context.getBean("medic");
 
         medic.shoot();
         medic.aim();
@@ -24,8 +29,8 @@ public class Main {
         medic.heal(infantryman);
         medic.tie(infantryman);
 
-        Tankman tankman = new Tankman("C", 2, 2, 100, "EAST", 2, 4);
-        Tank tank = new Tank(10, 200);
+        Tankman tankman = (Tankman) context.getBean("tankman");
+        Tank tank = (Tank) context.getBean("tank");
 
         tankman.getIn(tank);
         tankman.shoot();
@@ -36,8 +41,8 @@ public class Main {
         tankman.turnSteeringWheel(1);
         tankman.getOut();
 
-        MotorcycleDriver driver = new MotorcycleDriver("D", 3, 3, 100, "WEST", 3, 2);
-        Motorcycle motorcycle = new Motorcycle(20, 100);
+        MotorcycleDriver driver = (MotorcycleDriver) context.getBean("motorcycle-driver");
+        Motorcycle motorcycle = (Motorcycle) context.getBean("motorcycle");
 
         driver.getIn(motorcycle);
         driver.pressGas();

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       default-init-method="wakeUp"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="infantryman" class="ru.kpfu.itis.lzakharov.army.Infantryman">
+
+        <constructor-arg index="0" value="A"/>
+        <constructor-arg index="1" value="0"/>
+        <constructor-arg index="2" value="0"/>
+        <constructor-arg index="3" value="100"/>
+        <constructor-arg index="4" value="NORTH"/>
+        <constructor-arg index="5" value="2"/>
+        <constructor-arg index="6" value="3"/>
+    </bean>
+
+    <bean id="medic" class="ru.kpfu.itis.lzakharov.army.Medic">
+
+        <constructor-arg index="0" value="B"/>
+        <constructor-arg index="1" value="1"/>
+        <constructor-arg index="2" value="1"/>
+        <constructor-arg index="3" value="200"/>
+        <constructor-arg index="4" value="NORTH"/>
+        <constructor-arg index="5" value="2"/>
+        <constructor-arg index="6" value="2"/>
+    </bean>
+
+    <bean id="tankman" class="ru.kpfu.itis.lzakharov.army.Tankman">
+
+        <constructor-arg index="0" value="C"/>
+        <constructor-arg index="1" value="2"/>
+        <constructor-arg index="2" value="2"/>
+        <constructor-arg index="3" value="100"/>
+        <constructor-arg index="4" value="EAST"/>
+        <constructor-arg index="5" value="2"/>
+        <constructor-arg index="6" value="4"/>
+    </bean>
+
+    <bean id="tank" class="ru.kpfu.itis.lzakharov.army.Tank">
+
+        <constructor-arg index="0" value="10"/>
+        <constructor-arg index="1" value="200"/>
+    </bean>
+
+    <bean id="motorcycle-driver" class="ru.kpfu.itis.lzakharov.army.MotorcycleDriver">
+        <constructor-arg index="0" value="D"/>
+        <constructor-arg index="1" value="3"/>
+        <constructor-arg index="2" value="3"/>
+        <constructor-arg index="3" value="100"/>
+        <constructor-arg index="4" value="WEST"/>
+        <constructor-arg index="5" value="3"/>
+        <constructor-arg index="6" value="2"/>
+    </bean>
+
+    <bean id="motorcycle" class="ru.kpfu.itis.lzakharov.army.Motorcycle">
+        <constructor-arg index="0" value="20"/>
+        <constructor-arg index="1" value="100"/>
+    </bean>
+
+</beans>
