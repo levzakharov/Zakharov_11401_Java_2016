@@ -11,7 +11,7 @@
     <title>Process</title>
 </head>
 <body>
-    <form name="process" action="/process" method="get">
+    <form name="process" action="/process" method="post">
         <textarea name="text"></textarea>
         <select name="operation">
             <option disabled>Выберете операцию</option>
