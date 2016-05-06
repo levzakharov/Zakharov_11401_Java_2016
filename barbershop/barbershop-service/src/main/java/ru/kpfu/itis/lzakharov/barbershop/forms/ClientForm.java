@@ -1,10 +1,7 @@
 package ru.kpfu.itis.lzakharov.barbershop.forms;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.kpfu.itis.lzakharov.barbershop.domain.model.Barber;
-import ru.kpfu.itis.lzakharov.barbershop.domain.model.Credential;
 import ru.kpfu.itis.lzakharov.barbershop.domain.model.Gender;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +9,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class BarberForm {
+public class ClientForm {
     @NotBlank(message = "Поле не должно быть пустым")
     private String login;
 

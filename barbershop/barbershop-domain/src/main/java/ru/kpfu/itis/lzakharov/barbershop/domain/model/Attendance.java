@@ -21,7 +21,6 @@ public class Attendance {
     }
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(generator = "ATTENDANCE_ID_SEQ", strategy = GenerationType.SEQUENCE)
     public Integer getId() {
         return id;
@@ -31,8 +30,6 @@ public class Attendance {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, unique = true, length = 32)
     public String getName() {
         return name;
     }
@@ -41,8 +38,6 @@ public class Attendance {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "price", nullable = false, length = 2)
     public String getPrice() {
         return price;
     }

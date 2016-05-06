@@ -1,28 +1,34 @@
 package ru.kpfu.itis.lzakharov.barbershop.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.kpfu.itis.lzakharov.barbershop.domain.model.Admin;
 import ru.kpfu.itis.lzakharov.barbershop.domain.model.Barber;
+import ru.kpfu.itis.lzakharov.barbershop.domain.model.Credential;
+import ru.kpfu.itis.lzakharov.barbershop.domain.model.Role;
 import ru.kpfu.itis.lzakharov.barbershop.forms.AttendanceForm;
 import ru.kpfu.itis.lzakharov.barbershop.forms.BarberForm;
 import ru.kpfu.itis.lzakharov.barbershop.forms.BarberUpdateInfoForm;
 import ru.kpfu.itis.lzakharov.barbershop.forms.BarbershopForm;
-import ru.kpfu.itis.lzakharov.barbershop.service.AttendanceService;
-import ru.kpfu.itis.lzakharov.barbershop.service.BarberService;
-import ru.kpfu.itis.lzakharov.barbershop.service.BarbershopService;
+import ru.kpfu.itis.lzakharov.barbershop.service.*;
+import ru.kpfu.itis.lzakharov.barbershop.web.security.SecurityUtils;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.LinkedList;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+    @Autowired
+    AdminService adminService;
+
+    @Autowired
+    ClientService clientService;
+
     @Autowired
     BarberService barberService;
 
@@ -32,8 +38,25 @@ public class AdminController {
     @Autowired
     AttendanceService attendanceService;
 
+    @Autowired
+    CredentialService credentialService;
+
+    @Autowired
+    RecordService recordService;
+
+    @ModelAttribute("user")
+    public Admin credential() {
+        return adminService.findOneByCredential(SecurityUtils.getCurrentUser());
+    }
+
     @RequestMapping(value = "")
-    public String getIndex() {
+    public String getIndex(ModelMap model) {
+        model.put("total", credentialService.count());
+        model.put("barbers_count", barberService.count());
+        model.put("clients_count", clientService.count());
+        model.put("records_count", recordService.count());
+        model.put("records", recordService.findAll());
+
         return "admin";
     }
 
@@ -53,7 +76,20 @@ public class AdminController {
             model.put("barbers", barberService.findAll());
             return "barbers";
         } else {
-            barberService.save(barberForm.toBarber());
+            Credential credential = new Credential();
+            credential.setLogin(barberForm.getLogin());
+            credential.setPassword(barberForm.getPassword());
+            credential.setRole(Role.ROLE_BARBER);
+            credential = credentialService.save(credential);
+
+            Barber barber = new Barber();
+            barber.setCredential(credential);
+            barber.setFirstName(barberForm.getFirstName());
+            barber.setLastName(barberForm.getLastName());
+            barber.setGender(barberForm.getGender());
+            barber.setBirthdate(barberForm.getBirthdate());
+
+            barberService.save(barber);
         }
 
         return "redirect:/admin/barbers";
@@ -64,35 +100,6 @@ public class AdminController {
         barberService.delete(id);
 
         return new ModelAndView("redirect:/admin/barbers");
-    }
-
-    @RequestMapping(value = "/barbershops", method = RequestMethod.GET)
-    public String getBarbershops(ModelMap model) {
-        model.addAttribute("barbershop-form", new BarbershopForm());
-        model.put("barbershops", barbershopService.findAll());
-
-        return "barbershops";
-    }
-
-    @RequestMapping(value = "/barbershops", method = RequestMethod.POST)
-    public String addBarbershop(@ModelAttribute("barbershop-form") @Valid BarbershopForm barbershopForm,
-                                BindingResult result, ModelMap model) {
-
-        if (result.hasErrors()) {
-            model.put("barbershops", barbershopService.findAll());
-            return "barbershops";
-        } else {
-            barbershopService.save(barbershopForm.toBarbershop());
-        }
-
-        return "redirect:/admin/barbershops";
-    }
-
-    @RequestMapping(value = "/barbershops/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView removeBarbershop(@PathVariable Integer id) {
-        barbershopService.delete(id);
-
-        return new ModelAndView("redirect:/admin/barbershops");
     }
 
     @RequestMapping(value = "/barbers/{id}", method = RequestMethod.GET)
@@ -131,6 +138,35 @@ public class AdminController {
         barberService.update(barber);
 
         return "redirect:/admin/barbers/" + id;
+    }
+
+    @RequestMapping(value = "/barbershops", method = RequestMethod.GET)
+    public String getBarbershops(ModelMap model) {
+        model.addAttribute("barbershop-form", new BarbershopForm());
+        model.put("barbershops", barbershopService.findAll());
+
+        return "barbershops";
+    }
+
+    @RequestMapping(value = "/barbershops", method = RequestMethod.POST)
+    public String addBarbershop(@ModelAttribute("barbershop-form") @Valid BarbershopForm barbershopForm,
+                                BindingResult result, ModelMap model) {
+
+        if (result.hasErrors()) {
+            model.put("barbershops", barbershopService.findAll());
+            return "barbershops";
+        } else {
+            barbershopService.save(barbershopForm.toBarbershop());
+        }
+
+        return "redirect:/admin/barbershops";
+    }
+
+    @RequestMapping(value = "/barbershops/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView removeBarbershop(@PathVariable Integer id) {
+        barbershopService.delete(id);
+
+        return new ModelAndView("redirect:/admin/barbershops");
     }
 
     @RequestMapping(value = "/attendances", method = RequestMethod.GET)

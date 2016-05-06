@@ -1,5 +1,7 @@
 package ru.kpfu.itis.lzakharov.barbershop.domain.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,27 +9,9 @@ import java.util.List;
 @Table(name = "barbershop")
 @SequenceGenerator(name = "BARBERSHOP_ID_SEQ", sequenceName = "barbershop_id_seq", allocationSize = 1)
 public class Barbershop {
-    /**
-     * The ID of this barbershop in database.
-     * Value generated from sequence "BARBERSHOP_ID_SEQ".
-     */
     private int id;
-
-    /**
-     * The address of this barbershop.
-     * Should be unique.
-     */
     private String address;
-
-    /**
-     * The phone number of this barbershop.
-     * Should be unique.
-     */
     private String phone;
-
-    /**
-     * The list of barbers that works in this barbershop.
-     */
     private List<Barber> barbers;
 
     public Barbershop() {

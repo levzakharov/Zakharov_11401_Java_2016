@@ -1,6 +1,5 @@
 package ru.kpfu.itis.lzakharov.barbershop.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,31 +8,22 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "barber")
-@SequenceGenerator(name = "BARBER_ID_SEQ", sequenceName = "barber_id_seq", allocationSize = 1)
-public class Barber {
+@Table(name = "client")
+@SequenceGenerator(name = "CLIENT_ID_SEQ", sequenceName = "client_id_seq", allocationSize = 1)
+public class Client {
     private Integer id;
     private Credential credential;
     private String firstName;
     private String lastName;
     private Date birthdate;
     private Gender gender;
-    private Barbershop barbershop;
 
-    public Barber() {
-    }
-
-    public Barber(Credential credential, String firstName, String lastName, Date birthdate, Gender gender) {
-        this.credential = credential;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.gender = gender;
+    public Client() {
     }
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(generator = "BARBER_ID_SEQ", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "CLIENT_ID_SEQ", strategy = GenerationType.SEQUENCE)
     public Integer getId() {
         return id;
     }
@@ -91,17 +81,6 @@ public class Barber {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "barber_barbershop", joinColumns = {@JoinColumn(name = "barber_id")}, inverseJoinColumns = {@JoinColumn(name = "barbershop_id")})
-    @JsonIgnore
-    public Barbershop getBarbershop() {
-        return barbershop;
-    }
-
-    public void setBarbershop(Barbershop barbershop) {
-        this.barbershop = barbershop;
     }
 
     @Override

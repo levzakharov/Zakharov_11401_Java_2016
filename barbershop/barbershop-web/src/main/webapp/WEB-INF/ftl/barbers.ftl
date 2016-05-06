@@ -1,4 +1,4 @@
-<#include "template.ftl"/>
+<#include "admin-template.ftl"/>
 
 <#macro content>
     <#assign form=JspTaglibs["http://www.springframework.org/tags/form"]>
@@ -25,6 +25,15 @@
 
                 <@form.form action="/admin/barbers" method="post" modelAttribute="barber-form" cssClass="form-horizontal form-label-left">
                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="login">Логин <span
+                                class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <@form.input path="login" id="input-login" required="required" cssClass="form-control col-md-7 col-xs-12" />
+                            <@form.errors path="login" cssClass="alert"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Имя <span
                                 class="required">*</span>
                         </label>
@@ -38,19 +47,8 @@
                                 class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <@form.input path="lastName" id="last-name"
-                            cssClass="form-control col-md-7 col-xs-12" />
+                            <@form.input path="lastName" id="last-name" cssClass="form-control col-md-7 col-xs-12" />
                             <@form.errors path="lastName" cssClass="alert"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <@form.input path="email" id="email"
-                            cssClass="form-control col-md-7 col-xs-12"/>
-                            <@form.errors path="email" cssClass="alert"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -76,7 +74,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <@form.input path="birthdate" id="birthday"
                             cssClass="date-picker form-control col-md-7 col-xs-12" required="required"
-                            placeholder="MM.DD.YYYY" />
+                            placeholder="DD.MM.YYYY" />
                             <@form.errors path="birthdate" cssClass="alert"/>
                         </div>
                     </div>
@@ -102,7 +100,7 @@
                 <thead>
                 <tr>
                     <th>Имя</th>
-                    <th>Email</th>
+                    <th>Логин</th>
                     <th>Пароль</th>
                     <th>Пол</th>
                     <th>Дата рождения</th>
@@ -115,8 +113,8 @@
                     <#list barbers as barber>
                     <tr onclick="location.href = '/admin/barbers/${barber.id}';">
                         <td>${barber.lastName} ${barber.firstName}</td>
-                        <td>${barber.email}</td>
-                        <td>${barber.password}</td>
+                        <td>${barber.credential.login}</td>
+                        <td>${barber.credential.password}</td>
                         <td>${barber.gender}</td>
                         <td>${barber.birthdate}</td>
                         <td>

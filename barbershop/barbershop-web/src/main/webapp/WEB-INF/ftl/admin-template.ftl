@@ -29,7 +29,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Barbershop!</span></a>
+                    <a href="/admin" class="site_title"><i class="fa fa-paw"></i> <span>Barbershop</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2>John Doe</h2>
+                        <h2>${user.firstName} ${user.lastName}</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -58,7 +58,7 @@
                                     </li>
                                     <li><a href="/admin/barbershops">Парикмахерские</a>
                                     </li>
-                                    <li><a href="index3.html">Dashboard3</a>
+                                    <li><a href="/admin/attendances">Услуги</a>
                                     </li>
                                 </ul>
                             </li>
@@ -83,18 +83,16 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="/resources/images/img.jpg" alt="">John Doe
+                                <img src="/resources/images/img.jpg" alt="">${user.firstName} ${user.lastName}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;"> Profile</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                <#--<li>-->
+                                    <#--<a href="/admin/settings">-->
+                                        <#--<span>Settings</span>-->
+                                    <#--</a>-->
+                                <#--</li>-->
+                                <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>
@@ -152,9 +150,21 @@
 <!-- bootstrap-daterangepicker -->
 <script src="/resources/js/moment/moment.min.js"></script>
 <script src="/resources/js/datepicker/daterangepicker.js"></script>
+<!-- Datatables -->
+<script src="/resources/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/resources/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="/resources/js/custom.js"></script>
+
+<!-- Datatables -->
+<script>
+    $(document).ready(function() {
+        $('#datatable').dataTable();
+    });
+</script>
+<!-- /Datatables -->
 
 </body>
 </html>

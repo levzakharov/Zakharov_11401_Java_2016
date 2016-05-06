@@ -1,4 +1,4 @@
-<#include "template.ftl"/>
+<#include "admin-template.ftl"/>
 
 <#macro content>
     <#assign form=JspTaglibs["http://www.springframework.org/tags/form"]>
@@ -60,7 +60,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <table id="datatable" class="table table-hover">
+            <table id="datatable" class="table">
                 <thead>
                 <tr>
                     <th>Название</th>
@@ -71,7 +71,7 @@
 
                 <tbody>
                     <#list attendances as attendance>
-                    <tr onclick="location.href = '/admin/attendance/${attendance.id}';">
+                    <tr>
                         <td>${attendance.name}</td>
                         <td>${attendance.price}руб.</td>
                         <td>

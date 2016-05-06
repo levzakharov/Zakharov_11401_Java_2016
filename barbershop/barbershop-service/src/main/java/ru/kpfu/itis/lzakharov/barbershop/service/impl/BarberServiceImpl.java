@@ -45,4 +45,14 @@ public class BarberServiceImpl implements BarberService {
     public Barber update(Barber entity) {
         return barberRepository.save(entity);
     }
+
+    @Override
+    public List<Barber> findByBarbershop(Barbershop barbershop) {
+        return barberRepository.findByBarbershop(barbershop);
+    }
+
+    @Override
+    public Long count() {
+        return barberRepository.count();
+    }
 }

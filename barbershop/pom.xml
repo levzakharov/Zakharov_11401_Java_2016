@@ -16,7 +16,9 @@
 
         <spring.version>4.2.5.RELEASE</spring.version>
         <spring-data-jpa.version>1.10.1.RELEASE</spring-data-jpa.version>
-        <spring-security-config.version>4.0.4.RELEASE</spring-security-config.version>
+        <spring-security.version>4.0.4.RELEASE</spring-security.version>
+        <jackson.version>1.9.10</jackson.version>
+        <jackson-databind.version>2.5.0</jackson-databind.version>
         <freemarker.version>2.3.23</freemarker.version>
         <hibernate-core.version>5.1.0.Final</hibernate-core.version>
         <hibernate-entitymanager.version>5.1.0.Final</hibernate-entitymanager.version>
@@ -94,7 +96,24 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
-                <version>${spring-security-config.version}</version>
+                <version>${spring-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <!-- Jackson JSON Mapper -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
             </dependency>
 
             <!--

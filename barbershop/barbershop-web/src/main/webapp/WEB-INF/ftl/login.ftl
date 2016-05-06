@@ -28,15 +28,15 @@
         <div id="login" class=" form">
             <section class="login_content">
                 <form action="/login/process" method="post">
-                    <h1>Login Form</h1>
+                    <h1>Вход</h1>
                     <div>
-                        <input name="email" type="text" class="form-control" placeholder="Email" required=""/>
+                        <input name="login" type="text" class="form-control" placeholder="login" required=""/>
                     </div>
                     <div>
                         <input name="password" type="password" class="form-control" placeholder="Пароль" required=""/>
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="/">Войти</a>
+                        <button type="submit" class="btn btn-success">Войти</button>
                     </div>
                     <div class="clearfix"></div>
                     <div class="separator">

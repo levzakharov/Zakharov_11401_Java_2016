@@ -1,4 +1,4 @@
-<#include "template.ftl"/>
+<#include "admin-template.ftl"/>
 
 <#macro content>
     <#assign form=JspTaglibs["http://www.springframework.org/tags/form"]>
@@ -39,16 +39,6 @@
                             <@form.input path="lastName" id="last-name" cssClass="form-control col-md-7 col-xs-12"
                             value="${barber.lastName}"/>
                             <@form.errors path="lastName" cssClass="alert"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <@form.input path="email" id="email" cssClass="form-control col-md-7 col-xs-12"
-                            value="${barber.email}"/>
-                            <@form.errors path="email" cssClass="alert"/>
                         </div>
                     </div>
                     <div class="form-group">

@@ -1,11 +1,34 @@
+CREATE TABLE credential (
+  id       SERIAL PRIMARY KEY,
+  login    VARCHAR(32) UNIQUE NOT NULL,
+  password VARCHAR(32)        NOT NULL,
+  role     VARCHAR(16)        NOT NULL,
+  CONSTRAINT check_role CHECK (role IN ('ROLE_ADMIN', 'ROLE_CLIENT', 'ROLE_BARBER'))
+);
+
+CREATE TABLE admin (
+  id            SERIAL PRIMARY KEY,
+  credential_id INTEGER     NOT NULL REFERENCES credential (id),
+  first_name    VARCHAR(32) NOT NULL,
+  last_name     VARCHAR(32) NOT NULL
+);
+
 CREATE TABLE barber (
-  id         SERIAL PRIMARY KEY,
-  first_name VARCHAR(32)        NOT NULL,
-  last_name  VARCHAR(32)        NOT NULL,
-  email      VARCHAR(32) UNIQUE NOT NULL,
-  password   VARCHAR(32)        NOT NULL,
-  gender     CHAR CHECK (gender IN ('M', 'F')),
-  bdate      DATE               NOT NULL
+  id            SERIAL PRIMARY KEY,
+  credential_id INTEGER     NOT NULL REFERENCES credential (id),
+  first_name    VARCHAR(32) NOT NULL,
+  last_name     VARCHAR(32) NOT NULL,
+  gender        CHAR CHECK (gender IN ('M', 'F')),
+  bdate         DATE        NOT NULL
+);
+
+CREATE TABLE client (
+  id            SERIAL PRIMARY KEY,
+  credential_id INTEGER     NOT NULL REFERENCES credential (id),
+  first_name    VARCHAR(32) NOT NULL,
+  last_name     VARCHAR(32) NOT NULL,
+  gender        CHAR CHECK (gender IN ('M', 'F')),
+  bdate         DATE        NOT NULL
 );
 
 CREATE TABLE barbershop (
@@ -21,8 +44,17 @@ CREATE TABLE barber_barbershop (
 );
 
 CREATE TABLE attendance (
-  id          SERIAL PRIMARY KEY,
-  name        VARCHAR(32) UNIQUE NOT NULL,
-  price       VARCHAR(8) NOT NULL
+  id    SERIAL PRIMARY KEY,
+  name  VARCHAR(32) UNIQUE NOT NULL,
+  price VARCHAR(8)         NOT NULL
+);
+
+CREATE TABLE record (
+  id            SERIAL PRIMARY KEY,
+  client_id     INTEGER NOT NULL REFERENCES client (id),
+  barber_id     INTEGER NOT NULL REFERENCES barber (id),
+  attendance_id INTEGER NOT NULL REFERENCES attendance (id),
+  rdate         DATE    NOT NULL,
+  hour          INTEGER NOT NULL
 );
 

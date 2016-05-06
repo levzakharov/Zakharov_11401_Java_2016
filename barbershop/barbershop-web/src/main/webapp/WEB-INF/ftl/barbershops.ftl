@@ -1,4 +1,4 @@
-<#include "template.ftl"/>
+<#include "admin-template.ftl"/>
 
 <#macro content>
     <#assign form=JspTaglibs["http://www.springframework.org/tags/form"]>
