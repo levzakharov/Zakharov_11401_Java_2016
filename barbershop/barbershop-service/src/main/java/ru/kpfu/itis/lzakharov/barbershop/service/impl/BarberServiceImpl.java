@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.lzakharov.barbershop.domain.model.Barber;
 import ru.kpfu.itis.lzakharov.barbershop.domain.model.Barbershop;
+import ru.kpfu.itis.lzakharov.barbershop.domain.model.Credential;
 import ru.kpfu.itis.lzakharov.barbershop.domain.repository.BarberRepository;
 import ru.kpfu.itis.lzakharov.barbershop.service.BarberService;
 
@@ -49,6 +50,11 @@ public class BarberServiceImpl implements BarberService {
     @Override
     public List<Barber> findByBarbershop(Barbershop barbershop) {
         return barberRepository.findByBarbershop(barbershop);
+    }
+
+    @Override
+    public Barber findOneByCredential(Credential credential) {
+        return barberRepository.findOneByCredential(credential);
     }
 
     @Override

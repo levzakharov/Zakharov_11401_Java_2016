@@ -10,5 +10,6 @@ import java.util.List;
 public interface RecordService extends AbstractCrudService<Record> {
     List<Record> findByDateAndBarber(Date date, Barber barber);
     List<Record> findByClient(Client client);
+    List<Record> findByBarber(Barber barber);
     Long count();
 }

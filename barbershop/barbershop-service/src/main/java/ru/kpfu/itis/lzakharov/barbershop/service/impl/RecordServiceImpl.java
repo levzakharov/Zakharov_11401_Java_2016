@@ -58,6 +58,11 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    public List<Record> findByBarber(Barber barber) {
+        return recordRepository.findByBarber(barber);
+    }
+
+    @Override
     public Long count() {
         return recordRepository.count();
     }

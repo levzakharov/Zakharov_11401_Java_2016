@@ -14,4 +14,5 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<Record, Integer> {
     List<Record> findByDateAndBarber(Date date, Barber barber);
     List<Record> findByClient(Client client);
+    List<Record> findByBarber(Barber barber);
 }

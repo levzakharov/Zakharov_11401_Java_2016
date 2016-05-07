@@ -44,6 +44,8 @@ public class IndexController {
                 return "redirect:/admin";
             case ROLE_CLIENT:
                 return "redirect:/client";
+            case ROLE_BARBER:
+                return "redirect:/barber";
         }
         return "redirect:/";
     }

@@ -221,7 +221,7 @@
                         for (var i = 0; i < data.length; i++) {
                             $('#time').append($("<option></option>")
                                     .attr("value", data[i])
-                                    .text(data[i]));
+                                    .text(data[i] + ":00"));
                         }
                     }
                 });
