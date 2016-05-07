@@ -28,6 +28,7 @@
         <validation-api.version>1.1.0.Final</validation-api.version>
         <commons-validator.version>1.5.0</commons-validator.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <aspectjrt.version>1.8.9</aspectjrt.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -36,6 +37,7 @@
         <module>barbershop-domain</module>
         <module>barbershop-service</module>
         <module>barbershop-web</module>
+        <module>barbershop-log</module>
     </modules>
 
     <dependencyManagement>
@@ -193,6 +195,11 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.7.20</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectjrt.version}</version>
             </dependency>
 
             <!--
